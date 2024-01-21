@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  simple-web-service:
+    image: devopsdockeruh/simple-web-service
+    command: sh -c "touch /usr/src/app/text.log && tail -f /usr/src/app/text.log"
+    volumes:
+      - ./logs:/usr/src/app

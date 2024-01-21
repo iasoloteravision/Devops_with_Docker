@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  backend:
+    image: backend-image:latest
+    networks:
+      - app-network
+    environment:
+      REDIS_URL: "redis://redis:6379/0"
+      DATABASE_URL: "postgres://postgres:password@db:5432/mydatabase"
+    restart: unless-stopped
+
+  frontend:
+    image: frontend-image:latest
+    networks:
+      - app-network
+    environment:
+      - REACT_APP_BACKEND_URL=http://backend:8080
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: example_password
+      POSTGRES_USER: example_user
+      POSTGRES_DB: example_db
+    volumes:
+      - ./database:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  redis:
+    image: "redis:latest"
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  db:
+    image: "postgres:latest"
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5433:5432"
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - app-network
+    depends_on:
+      - frontend
+      - backend
+    ports:
+      - "80:80"
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge

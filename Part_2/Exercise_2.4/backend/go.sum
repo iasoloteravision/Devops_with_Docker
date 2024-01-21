@@ -1,0 +1,4 @@
+example.com/myapp v1.0.0/go.mod h1:abcdefghi1234567890abcdefghijklmno1234567890abcd
+example.com/myapp v1.0.0/go.sum h1:abcdefghijklmnopqrstuvwxyz0123456789abcdefghijkl
+github.com/gin-gonic/gin v1.7.1 h1:ijklmnopqrstuvwxyz0123456789abcdefghijklmnoabcdefghijkl
+github.com/gin-gonic/gin v1.7.1/go.mod h1:mnopqrstuvwxyz0123456789abcdefghijklmnoabcdefghijkl

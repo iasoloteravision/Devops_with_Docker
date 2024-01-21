@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  backend:
+    build:
+      context: /home/imanolasolo/Devops_with_Docker/Part_2/Exercise_2.3/backend  # Replace with the path to your backend application
+    ports:
+      - "8080:8080"  # Adjust port mapping as needed
+
+  frontend:
+    build:
+      context: /home/imanolasolo/Devops_with_Docker/Part_2/Exercise_2.3/frontend  # Replace with the path to your frontend application
+    ports:
+      - "3000:3000"  # Adjust port mapping as needed
